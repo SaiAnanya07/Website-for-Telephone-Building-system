@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Telephone Billing System</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
+        text-decoration: none;
+        outline: none;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      #home {
+        background-image: url("homepage.jpg");
+        background-repeat: no-repeat;
+      }
+      #login{
+        background-image: url("4.jpg");
+        background-repeat: no-repeat ;
+        background-attachment: fixed;
+  background-position: center;
+      }
+      .container {
+        max-width: 1300px;
+        padding: 0px 100px;
+        margin: auto;
+        z-index: 10;
+      }
+      .text-secondary {
+        color: orangered;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+      .m-heading {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+      .btn-md {
+        display: inline-block;
+        background: orangered;
+        color: black;
+        font-size: 25px;
+        font-weight: bold;
+        padding: 8px 36px;
+        margin-top: 20px;
+        border-radius: 50px;
+        border: 2px solid orangered;
+        transition: all 0.3s ease;
+      }
+      .btn-md:hover {
+        color: orangered;
+        background: none;
+      }
+
+      .title::before {
+        content: "";
+        background: orangered;
+        height: 2px;
+        width: 200px;
+        margin: 0 auto;
+        display: block;
+        transform: translateY(44px);
+      }
+
+      .title::after {
+        content: "";
+        background: orangered;
+        height: 7px;
+        width: 65px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+        display: block;
+        transform: translateY(1px);
+      }
+      h1 {
+        font-family: cursive;
+        font-weight: bolder;
+        font-style: italic;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: rgb(220, 213, 213);
+      }
+
+      li {
+        float: right;
+        font-weight: bolder;
+      }
+
+      li a {
+        display: block;
+        padding: 20px;
+        background-color: #ead5d5;
+      }
+      .navbar {
+        position: fixed;
+        width: 100%;
+        margin: auto;
+        padding: 35px 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 999;
+      }
+      .navbar.sticky {
+        padding: 10px 100px;
+        background: #07080b;
+      }
+      .navbar .logo {
+        color: orangered;
+        font-size: 30px;
+      }
+
+      .navbar ul li {
+        list-style: none;
+        display: inline-block;
+        margin: 0 20px;
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .navbar ul li span {
+        color: orangered;
+        border-left: 1px solid #a9adb8;
+        padding-left: 25px;
+        padding-right: 5px;
+        text-align: center;
+      }
+      .navbar ul li a {
+        color: orangered;
+        font-weight: bold;
+        transition: all 0.5s ease;
+      }
+
+      .navbar ul li a:hover {
+        color: white;
+      }
+      .showcase {
+        background-image: url("bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100vh;
+      }
+      .showcase-text {
+        max-width: 800px;
+        padding-top: 250px;
+        padding-left: 120px;
+        color: black;
+      }
+      .showcase-text .text-1 {
+        font-size: 27px;
+      }
+      .showcase-text .text-2 {
+        font-size: 75px;
+        font-weight: 700;
+      }
+      .showcase-text .text-3 {
+        font-size: 40px;
+        margin: 5px 0;
+        font-weight: 700;
+      }
+      .showcase-text .text-3 span {
+        color: orangered;
+      }
+      #about {
+        background: black;
+      }
+
+      .about .title::before {
+        background: orangered;
+      }
+      .about .title::after {
+        background: orangered;
+      }
+
+      .about h1 {
+        color: white;
+        text-align: center;
+        font-size: 80px;
+        transform: translateY(20px);
+        opacity: 0.1;
+        padding-top: -20px;
+      }
+
+      .about h5 {
+        font-weight: 700;
+        transform: translateY(-65px);
+      }
+
+      .about .about-content .column {
+        margin-top: 40px;
+      }
+      .about .about-content,
+      .services .service-content,
+      .skills .skill-content,
+      .contact .contact-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        transform: translateY(-60px);
+      }
+
+      .about .about-content .left {
+        width: 55%;
+        padding: 0 20px;
+        overflow: hidden;
+      }
+      .about .about-content .left img {
+        height: 450px;
+        width: 450px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .about .about-content .right {
+        width: 45%;
+        color: #a9adb8;
+      }
+
+      .about .about-content .right .text {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .about .about-content .right p {
+        text-align: justify;
+      }
+      .about .about-content .right .text span {
+        color: orangered;
+      }
+      .about .about-content .right .table {
+        width: 500px;
+        padding: 10px 0;
+        margin-left: 0px;
+      }
+      .about .about-content .right .table td {
+        padding: 10px;
+      }
+      #services {
+        background-image: url("workspace-laptop-office-accessories-copy-space_67155-1780.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100vh;
+      }
+
+      .services h5 {
+        font-weight: 700;
+        color: orangered;
+        transform: translateY(-65px);
+      }
+
+      .services h1 {
+        color: orangered;
+        text-align: center;
+        font-size: 80px;
+        transform: translateY(23px);
+        opacity: 0.1;
+        padding-top: -20px;
+      }
+
+      .services .service-content .main {
+        width: calc(30% - 20px);
+        min-height: 450px;
+        text-align: center;
+        border-radius: 5px;
+        position: relative;
+        cursor: pointer;
+      }
+      .service {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        transform: scale(1.05);
+        box-shadow: 0 0 20px -15px white;
+        transition: transform 0.8s;
+      }
+      .service-logo {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        margin: -90px auto 0;
+        background: #07080b;
+        border: 18px solid black;
+        transform: transform 1s;
+      }
+      .service-logo i {
+        color: orangered;
+        width: 50px;
+        margin-top: 20px;
+      }
+
+      .service h4 {
+        height: 28px;
+        width: 80%;
+        background: white;
+        margin: 60px auto;
+        position: relative;
+      }
+      .service h4::after {
+        content: "";
+        width: 40px;
+        height: 30px;
+        background: linear-gradient(to right, black, black);
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        z-index: -1;
+      }
+      .service h4::before {
+        content: "";
+        width: 40px;
+        height: 30px;
+        background: linear-gradient(to right, black, black);
+        position: absolute;
+        left: -5px;
+        bottom: -5px;
+        z-index: -1;
+      }
+      .shadowone {
+        height: 200px;
+        width: 80%;
+        background: #07080b;
+        position: absolute;
+        border-radius: 10px;
+        bottom: 0;
+        left: 10%;
+        z-index: -1;
+        box-shadow: 0 0 20px -15px #07080b;
+        transition: transform 0.8s;
+      }
+      .shadowtwo {
+        height: 200px;
+        width: 64%;
+        background: #07080b;
+        position: absolute;
+        border-radius: 10px;
+        bottom: 0;
+        left: 18%;
+        z-index: -2;
+      }
+
+      .main:hover .service {
+        transform: translateY(-50px);
+      }
+      .main:hover .shadowone {
+        transform: translateY(-25px);
+      }
+      # {
+        background-image: url("1.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100vh;
+      }
+
+    
+      .shadowone {
+        height: 200px;
+        width: 80%;
+        background: #07080b;
+        position: absolute;
+        border-radius: 10px;
+        bottom: 0;
+        left: 10%;
+        z-index: -1;
+        box-shadow: 0 0 20px -15px #07080b;
+        transition: transform 0.8s;
+      }
+      .shadowtwo {
+        height: 200px;
+        width: 64%;
+        background: #07080b;
+        position: absolute;
+        border-radius: 10px;
+        bottom: 0;
+        left: 18%;
+        z-index: -2;
+      }
+
+      .main:hover .service {
+        transform: translateY(-50px);
+      }
+      .main:hover .shadowone {
+        transform: translateY(-25px);
+      }
+      #skills {
+        background: #07080b;
+      }
+
+      .skills h1 {
+        color: #6e6e70;
+        text-align: center;
+        font-size: 80px;
+        transform: translateY(20px);
+        opacity: 0.1;
+        padding-top: -20px;
+      }
+      .skills h5 {
+        font-weight: 700;
+        transform: translateY(-65px);
+      }
+      .skills .title::before {
+        background: orangered;
+      }
+      .skills .title::after {
+        background: orangered;
+      }
+
+      .skills .skill-content .column {
+        margin-top: 40px;
+        width: calc(50% - 50px);
+      }
+
+      .skills .skill-content .left .text {
+        font-size: 27px;
+        font-weight: 700;
+        padding: 10px 0;
+        margin-bottom: 10px;
+        color: orangered;
+      }
+      .skills .skill-content .left p {
+        color: #a9adb8;
+        text-align: justify;
+        line-height: 1.4;
+        padding-top: 15px;
+      }
+      .skills .skill-content .left a {
+        display: inline-block;
+        background: orangered;
+        color: #07080b;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 8px 16px;
+        margin-top: 20px;
+        border-radius: 5px;
+        border: 2px solid orangered;
+        transition: all 0.3s ease;
+      }
+      .skills .skill-content .left a:hover {
+        color: orangered;
+        background: none;
+      }
+      .skills .skill-content .right .bars {
+        margin-bottom: 20px;
+      }
+      .skills .skill-content .right .info {
+        display: flex;
+        margin-bottom: 5px;
+        align-items: center;
+        justify-content: space-between;
+        color: #a9adb8;
+      }
+      .skills .skill-content .right span {
+        font-weight: 500;
+        font-size: 18px;
+      }
+
+      .skills .skill-content .right .line {
+        height: 2px;
+        width: 100%;
+        background: lightgray;
+        position: relative;
+      }
+
+      .skills .skill-content .right .line::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: orangered;
+      }
+
+      .skills .skill-content .right .ps::before {
+        width: 70%;
+      }
+      .skills .skill-content .right .mg::before {
+        width: 90%;
+      }
+      .skills .skill-content .right .axd::before {
+        width: 85%;
+      }
+      .skills .skill-content .right .uxd::before {
+        width: 90%;
+      }
+      .skills .skill-content .right .html::before {
+        width: 99%;
+      }
+      .skills .skill-content .right .dm::before {
+        width: 80%;
+      }
+      section{
+    padding: 40px 0;
+    
+}
+#contact{
+  background-image: url("5.jpg");
+  background-repeat: no-repeat;
+}
+.contact h1{
+    color: #6e6e70;
+    text-align: center;
+    font-size: 80px;
+    transform: translateY(20px);
+    opacity: 0.1;
+    padding-top: -20px;
+}
+.contact h5{
+    font-weight: 700;
+    transform: translateY(-65px);
+}
+.contact .title::before{
+    background: orangered;
+}
+.contact .title::after{
+    background: orangered;
+}
+.contact .contact-content .column{
+    margin-top: 40px;
+    width: calc(50% - 50px);
+}
+.contact .contact-content .left h2{
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: #A9ADB8;
+}
+.contact .contact-content .left .form-group input{
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #A9ADB8;
+    background: #fff;
+    border-radius: 5px;
+}
+.contact .contact-content .left .form-group textarea{
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    height: 150px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.contact .contact-content .left .btn-md{
+    padding: 8px 18px;
+    font-size: 16px;
+}
+
+.contact .contact-content .right{
+    color: #A9ADB8;
+}
+.contact .contact-content .right h2{
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.contact .contact-content .right p{
+    line-height: 1.6;
+}
+.contact .contact-content .right .items{
+    margin: 10px 0;
+}
+.contact .contact-content .right .items .item{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+.contact .contact-content .right .items .item i{
+    padding: 16px;
+    border: 1px solid #A9ADB8;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.contact .contact-content .right .items .item span{
+    font-size: 14px;
+}
+.contact .contact-content .right .links{
+    overflow: hidden;
+    padding: 10px 0;
+}
+.contact .contact-content .right .links li{
+    display: inline-block;
+    list-style: none;
+    padding-right: 15px;
+}
+.contact .contact-content .right .links li a{
+    color: #A9ADB8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.contact .contact-content .right .links li a:hover{
+    color: #FEC544;
+}
+#footer{
+    text-align: center;
+    background: #FEC544;
+    padding: 30px 0;
+    color: #07080B;
+    font-weight: 700;
+}
+
+
+.scroll-up-btn{
+    position: fixed;
+    height: 45px;
+    width: 42px;
+    border: 1px solid #fff;
+    background: orangered;
+    right: 30px;
+    bottom: 10px;
+    text-align: center;
+    line-height: 45px;
+    color: black;
+    z-index: 9999;
+    font-size: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.scroll-up-btn.show{
+    opacity: 1;
+    pointer-events: auto;
+    bottom: 30px;
+}
+form{
+  color:rgb(1, 1, 1);
+}
+.login.text.form-group input{
+  width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #A9ADB8;
+    background: #fff;
+    border-radius: 5px;
+  
+  
+      }
+      .login.text.form-group textarea{
+        width: 100%;
+    background: #fff;
+    padding: 10px;
+    height: 150px;
+    margin-top: 20px;
+    border-radius: 5px;
+      }
+      
+
+    </style>
+  </head>
+  <body id="home">
+    <div class="scroll-up-btn">
+      <i class="bx bx-up-arrow-alt bx-sm"></i>
+    </div>
+    <div class="showcase">
+      <nav class="navbar">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#login">login</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#register">register</a></li>
+        </ul>
+      </nav>
+      <div class="showcase-content">
+        <div class="showcase-text">
+          <div class="text-1">Hello</div>
+          <div class="text-2">This is BilleasE</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="register" class="register">
+      
+      <div class="container">
+        <h5 class="title text-center m-heading text-secondary">Register</h5>
+        <div class="about-content">
+          <div class="column left"></div>
+          <div class="column right">
+            
+            
+            <form >
+              <label ="fname">Moblie number</label><br />
+              <input type="text" id="fname" name="fname" /><br />
+              <br>
+              <label for="pwd">Create Password:</label><br>
+              
+              <input type="password" id="pwd" name="pwd" minlength="8" /><br />
+              <input type="submit" value="Sign up" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="login">
+      <h1>Login</h1>
+      <div class="container">
+        <h5 class="title text-center m-heading text-secondary">Login</h5>
+        <form action="billing.c" method="post">
+          <label ="customer_id"><b>Mobile number</b></label
+          ><br />
+          <input type="text" name="customer_id" /><br />
+          <br />
+          <label ="password "><b>Password</b> </label><br />
+          <input type="password" name="password" /><br />
+          <br />
+          <input type="submit" value="login" />
+        </form>
+        <br />
+        </div>
+    
+    </section>
+   
+    <section class="contact" id="contact">
+      <h1>CONTACT ME</h1>
+          <div class="container">
+              <h5 class="title text-center m-heading text-secondary">CONTACT ME</h5>
+              <div class="contact-content">
+                  <div class="column left">
+                      <h2>Just Say Hello</h2>
+                      <form>
+                          <div class="form-group">
+                              <input type="text" name="name" id="name" placeholder="Your Name">
+                          </div>
+                          <div class="form-group">
+                              <input type="email" name="email" id="email" placeholder="Your Email">
+                          </div>
+                          <div class="form-group">
+                              <input type="text" name="subject" id="subject" placeholder="Your Subject">
+                          </div>
+                          <div class="form-group">
+                              <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                          </div>
+                          <button type="submit" class="btn-md">Send Message</button>
+                      </form>
+                  </div>
+                  <div class="column right">
+                     <h2>Contact Info</h2>
+                     <p class="lead">Feel free to reach out to me anytime, will gladly be of help in ways possible and i always adore suggestions.</p>
+                     <div class="items">
+                         
+                         <div class="item">
+                              <i class="bx bxs-phone bx-xs"></i>
+                              <div class="text">
+                                  <h3>Phone</h3>
+                                  <p><span>+91 843xxxxxxx</span></p>
+                                  <p><span>+91 422-xxx-xxx</span></p>
+                              </div>
+                          </div>
+  
+                          <div class="item">
+                              <i class="bx bxs-map bx-xs"></i>
+                              <div class="text">
+                                  <h3>Address</h3>
+                                  <p><span>--------secret--------</span></p>
+                                  <p><span>India,Chennai</span></p>
+                              </div>
+                          </div>
+                         </div>
+                        
+  </section>
+
+  </body>
+</html>
